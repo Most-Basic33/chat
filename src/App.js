@@ -6,7 +6,7 @@ import './App.css'
 const socket = io.connect('http://localhost:4444')
 
 function App() {
-  const [state, setStaet] = useState({ message: '', name: '' })
+  const [state, setState] = useState({ message: '', name: '' })
   const [chat, setChat] = useState([])
 
   useEffect(() => {
@@ -14,23 +14,24 @@ function App() {
       setChat([...chat, { name, message }])
     })
   })
-
+ 
+   
   const onTextChange = e => {
-    setStaet({ ...state, [e.target.name]: e.target.value })
+    setState({ ...state, [e.target.name]: e.target.value })
   }
 
   const onMessageSubmit = e => {
     e.preventDefault()
     const { name, message } = state
     socket.emit('message', { name, message })
-    setStaet({ message: '', name })
+    setState({ message: '', name })
   }
 
   const renderChat = () => {
     return chat.map(({ name, message }, index) => (
       <div key={index}>
         <h3>
-          {name}: <span>{message}</span>
+          # {index} {name}: <span>{message}</span>
         </h3>
       </div>
     ))
@@ -41,7 +42,7 @@ function App() {
       <form onSubmit={onMessageSubmit}>
         <h1>Messanger</h1>
         <div className="name-field">
-          <TextField
+          <input
             name="name"
             onChange={e => onTextChange(e)}
             value={state.name}
