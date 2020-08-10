@@ -5,7 +5,7 @@ import Join from './Components/Join/Join'
 
 export default (
     <Switch>
-        <Route exact path = '/' component={Chat} />
-        <Route   path = '/join' component={Join}/>
+        <Route exact path = '/chat' component={Chat} />
+        <Route   path = '/' component={Join}/>
     </Switch>
 )
